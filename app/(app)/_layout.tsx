@@ -1,4 +1,5 @@
 import { Redirect, Stack } from 'expo-router';
+import { PULAR_LOGIN } from '../../src/config/dev';
 import { useAuth } from '../../src/contexts/AuthContext';
 
 // Telas protegidas. Sem sessão, volta para o login.
@@ -9,7 +10,7 @@ export default function AppLayout() {
     return null;
   }
 
-  if (!usuario) {
+  if (!usuario && !PULAR_LOGIN) {
     return <Redirect href="/login" />;
   }
 
