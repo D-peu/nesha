@@ -1,9 +1,12 @@
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
-import { Redirect } from 'expo-router';
+import { Href, Redirect } from 'expo-router';
+import { PULAR_LOGIN } from '../src/config/dev';
 import { useAuth } from '../src/contexts/AuthContext';
 import { colors } from '../src/theme/colors';
 
 // Porta de entrada: decide para onde ir conforme a sessão salva.
+// Com PULAR_LOGIN = true (src/config/dev.ts), abre direto a agenda do cliente.
+// Para ver a agenda do prestador, troque '/agenda' por '/prestador/agenda'.
 export default function Index() {
   const { usuario, loading } = useAuth();
 
@@ -15,7 +18,9 @@ export default function Index() {
     );
   }
 
-  return <Redirect href={usuario ? '/home' : '/login'} />;
+  const destino = usuario ? '/home' : PULAR_LOGIN ? '/agenda' : '/login';
+
+  return <Redirect href={destino as Href} />;
 }
 
 const styles = StyleSheet.create({

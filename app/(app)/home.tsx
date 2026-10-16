@@ -1,26 +1,21 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { BottomNav } from '../../src/components/BottomNav';
 import { useAuth } from '../../src/contexts/AuthContext';
 import { colors } from '../../src/theme/colors';
 
-// Tela provisória, só para provar que o login funciona. Substituir pela home real.
+// Tela provisória do catálogo. Substituir pela home real.
 export default function Home() {
-  const { usuario, signOut } = useAuth();
+  const { usuario } = useAuth();
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.safeArea} edges={['top']}>
       <View style={styles.content}>
         <Text style={styles.title}>Olá, {usuario?.nome}!</Text>
-        <Text style={styles.subtitle}>Login realizado com sucesso.</Text>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={signOut}
-          activeOpacity={0.85}
-        >
-          <Text style={styles.buttonText}>Sair</Text>
-        </TouchableOpacity>
+        <Text style={styles.subtitle}>O catálogo de serviços chega em breve.</Text>
       </View>
+
+      <BottomNav active="catalogo" />
     </SafeAreaView>
   );
 }
@@ -44,20 +39,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.textMuted,
     marginTop: 4,
-    marginBottom: 24,
-  },
-  button: {
-    height: 52,
-    borderRadius: 16,
-    borderWidth: 1.5,
-    borderColor: colors.primary,
-    backgroundColor: colors.surface,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonText: {
-    fontSize: 15,
-    fontWeight: '700',
-    color: colors.primary,
   },
 });
