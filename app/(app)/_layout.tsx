@@ -1,6 +1,8 @@
 import React from 'react';
 import { Redirect, Tabs } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
+import { Redirect, Stack } from 'expo-router';
+import { PULAR_LOGIN } from '../../src/config/dev';
 import { useAuth } from '../../src/contexts/AuthContext';
 import { colors } from '../../src/theme/colors';
 
@@ -13,7 +15,7 @@ export default function AppLayout() {
     return null;
   }
 
-  if (!usuario) {
+  if (!usuario && !PULAR_LOGIN) {
     return <Redirect href="/login" />;
   }
 
